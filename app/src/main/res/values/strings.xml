@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Compteur tarot</string>
+    <string name="jeudetarot">Jeu de tarot</string>
+    <string name="action_settings">Settings</string>
+    <string name="edittext">Nombre de joueurs</string>
+    <string name="nomduj">Nom du joueurs</string>
+    <string name="ok">Ok</string>
+    <string name="name">Name</string>
+    <string name="score">Score</string>
+    <string name="view">Nom des joueurs</string>
+
+</resources>
