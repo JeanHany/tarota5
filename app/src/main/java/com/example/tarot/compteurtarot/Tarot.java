@@ -3,6 +3,7 @@ package com.example.tarot.compteurtarot;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,10 +29,12 @@ public class Tarot {
     final int POIGNEE = 40;
     final int DOUBLE_POIGNEE = 80;
     final int TRIPLE_POIGNEE = 160;
+    final int RIEN = 80;
 
     String[] point = {"0","10","20","30","40","50","60"};
 
     private ArrayList<NomScore> arrayList = new ArrayList<NomScore>();
+    private ArrayList<NomScore> copyarrayList = new ArrayList<NomScore>();
     ArrayList<String> sj = new ArrayList<String>();
 
     //TODO gerer les mort
@@ -51,6 +54,10 @@ public class Tarot {
         return arrayList;
     }
 
+    public void setcopyArrayList() {
+        copy1();
+    }
+
     public String[] getjoueurs(){
         Object[] ob = sj.toArray();
         String[] st = new String[ob.length];
@@ -63,6 +70,7 @@ public class Tarot {
     public void calculscore(String name, String name1, int jeu, int scoreplus, boolean b){
         NomScore nomscore;
         ArrayList<Integer> mort = new ArrayList<Integer>();
+        copy();
         if(name.equals(name1)){
             for (int i = 0; i < arrayList.size(); i++) {
                 nomscore = arrayList.get(i);
@@ -103,10 +111,13 @@ public class Tarot {
                             nomscore.setScore(score - (jeu + scoreplus) * 2);
                         } else if (name1.equals(nomscore.getNom())) {
                             nomscore.setScore(score - jeu - scoreplus);
-                        } else {
-                            nomscore.setScore(score + jeu + scoreplus);
+                        } else if (jeu == RIEN && name.equals("")){
+                            nomscore.setScore(score + jeu/4 + scoreplus);
                         }
-                    }
+                            else{
+                                nomscore.setScore(score + jeu + scoreplus);
+                            }
+                        }
                 }else{
                     mort.add(i);
                 }
@@ -221,6 +232,7 @@ public class Tarot {
 
     public void misere(String name, int point, boolean a){
         NomScore nomscore;
+        copy();
         int pointp = point/4;
         for(int i=0; i<arrayList.size(); i++) {
             nomscore = arrayList.get(i);
@@ -243,7 +255,29 @@ public class Tarot {
         }
     }
 
+    public ArrayList<NomScore> getCopyarrayList() {
+        return copyarrayList;
+    }
+
     public String[] getPoint() {
         return point;
+    }
+
+    public void copy() {
+        copyarrayList.clear();
+        for(int i=0; i<arrayList.size(); i++){
+            NomScore ns1 = new NomScore(arrayList.get(i).getNom(), arrayList.get(i).getScore(), arrayList.get(i).isMort());
+            copyarrayList.add(ns1);
+            Log.i("Tarot", Integer.toString(copyarrayList.get(i).getScore()));
+        }
+    }
+
+    public void copy1() {
+        arrayList.clear();
+        for(int i=0; i<copyarrayList.size(); i++){
+            NomScore ns1 = new NomScore(copyarrayList.get(i).getNom(), copyarrayList.get(i).getScore(), copyarrayList.get(i).isMort());
+            arrayList.add(ns1);
+            Log.i("Tarot", Integer.toString(arrayList.get(i).getScore()));
+        }
     }
 }

@@ -57,6 +57,12 @@ public class TarotActivity extends Activity {
             }
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_tarot_activity, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -67,13 +73,14 @@ public class TarotActivity extends Activity {
             menu.add(Menu.NONE, 2, 2, "Garde");
             menu.add(Menu.NONE, 3, 3, "Garde Sans");
             menu.add(Menu.NONE, 4, 4, "Garde Contre");
-            menu.add(Menu.NONE, 10, 10, "Petit Chlem");
-            menu.add(Menu.NONE, 11, 11, "Grand Chlem");
             menu.add(Menu.NONE, 5, 5, "Misere");
             menu.add(Menu.NONE, 6, 6, "petit au bout");
             menu.add(Menu.NONE, 7, 7, "Poignee");
             menu.add(Menu.NONE, 8, 8, "Double Poignee");
-            menu.add(Menu.NONE, 9, 9, "Double Triple");
+            menu.add(Menu.NONE, 9, 9, "Triple Poignee");
+            menu.add(Menu.NONE, 10, 10, "Petit Chlem");
+            menu.add(Menu.NONE, 11, 11, "Grand Chlem");
+            menu.add(Menu.NONE, 12, 12, "Rien");
         }
 
     }
@@ -198,6 +205,10 @@ public class TarotActivity extends Activity {
 
                 displaydata(tarot);
                 break;
+            case 12 :
+                tarot.calculscore( "", nomscore.getNom(), tarot.RIEN, 0, false);
+                displaydata(tarot);
+                break;
             default :
                 break;
         }
@@ -256,5 +267,22 @@ public class TarotActivity extends Activity {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.menu_tarot_activity :
+                    tarot.setcopyArrayList();
+                    Log.i(TAG, "Retour");
+                    displaydata(tarot);
+                break;
+            default :
+                break;
+        }
+        return true;
     }
 }
