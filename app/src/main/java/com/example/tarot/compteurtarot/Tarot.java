@@ -40,11 +40,11 @@ public class Tarot {
     //TODO gerer les mort
     public void add_joueur(String name){
         if(arrayList.size() < 5) {
-            NomScore joueur = new NomScore(name, 0, false);
+            NomScore joueur = new NomScore(name, 0, "no_mort");
             sj.add(name);
             arrayList.add(joueur);
         }else{
-            NomScore joueur = new NomScore(name, 0, true);
+            NomScore joueur = new NomScore(name, 0, "mort");
             sj.add(name);
             arrayList.add(joueur);
         }
@@ -75,7 +75,7 @@ public class Tarot {
             for (int i = 0; i < arrayList.size(); i++) {
                 nomscore = arrayList.get(i);
                 int score = nomscore.getScore();
-                if(!nomscore.isMort()) {
+                if(nomscore.isMort().equals("no_mort")) {
                     if (b) {
                         if (name.equals(nomscore.getNom())) {
                             nomscore.setScore(score + (jeu + scoreplus) * 4);
@@ -97,7 +97,7 @@ public class Tarot {
             for (int i = 0; i < arrayList.size(); i++) {
                 nomscore = arrayList.get(i);
                 int score = nomscore.getScore();
-                if (!nomscore.isMort()) {
+                if (nomscore.isMort().equals("no_mort")) {
                     if (b) {
                         if (name.equals(nomscore.getNom())) {
                             nomscore.setScore(score + (jeu + scoreplus) * 2);
@@ -124,71 +124,79 @@ public class Tarot {
             }
         }
         int nb = 0;
-        switch(arrayList.size()) {
+        int pause = 0;
+        for (int i = 0; i < arrayList.size(); i++) {
+            nomscore = arrayList.get(i);
+            if (nomscore.isMort().equals("pause")) {
+                pause += 1;
+            }
+        }
+        int size = arrayList.size() - pause;
+        switch(size) {
             case 6:
                 for (int i = 0; i < arrayList.size(); i++) {
                     nomscore = arrayList.get(i);
-                    if (nomscore.isMort()) {
+                    if (nomscore.isMort().equals("mort")) {
                         nb = i;
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                     }
                 }
                 nb = nb + 1;
                 if (nb >= arrayList.size()) {
                     nb = nb - arrayList.size();
                     nomscore = arrayList.get(nb);
-                    nomscore.setMort(true);
+                    nomscore.setMort("mort");
                 } else {
                     nomscore = arrayList.get(nb);
-                    nomscore.setMort(true);
+                    nomscore.setMort("mort");
                 }
                 break;
             case 7:
                 if(mort.contains(arrayList.size()-1)){
                     if( mort.get(mort.size()-2) == arrayList.size()-2){
                         nomscore = arrayList.get(arrayList.size()-2);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(0);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }else{
                         nomscore = arrayList.get(arrayList.size()-1);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(1);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }
                 }else{
                     nb = mort.get(0);
                     nomscore = arrayList.get(nb);
-                    nomscore.setMort(false);
+                    nomscore.setMort("no_mort");
                     nomscore = arrayList.get(nb+2);
-                    nomscore.setMort(true);
+                    nomscore.setMort("mort");
                 }
                 break;
             case 8:
                 if(mort.contains(arrayList.size()-1)){
                     if( mort.get(mort.size()-3) == arrayList.size()-3){
                         nomscore = arrayList.get(arrayList.size()-3);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(0);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }else if(mort.get(mort.size()-2) == arrayList.size()-2){
                         nomscore = arrayList.get(arrayList.size()-2);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(1);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }
                     else{
                         nomscore = arrayList.get(arrayList.size()-1);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(2);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }
                 }else{
                     nb = mort.get(0);
                     nomscore = arrayList.get(nb);
-                    nomscore.setMort(false);
+                    nomscore.setMort("no_mort");
                     nomscore = arrayList.get(nb+3);
-                    nomscore.setMort(true);
+                    nomscore.setMort("mort");
 
                 }
                 break;
@@ -196,32 +204,32 @@ public class Tarot {
                 if(mort.contains(arrayList.size()-1)){
                     if( mort.get(mort.size()-4) == arrayList.size()-4){
                         nomscore = arrayList.get(arrayList.size()-4);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(0);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }else if(mort.get(mort.size()-3) == arrayList.size()-3){
                         nomscore = arrayList.get(arrayList.size()-3);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(1);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }else if(mort.get(mort.size()-2) == arrayList.size()-2){
                         nomscore = arrayList.get(arrayList.size()-2);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(2);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }
                     else{
                         nomscore = arrayList.get(arrayList.size()-1);
-                        nomscore.setMort(false);
+                        nomscore.setMort("no_mort");
                         nomscore = arrayList.get(3);
-                        nomscore.setMort(true);
+                        nomscore.setMort("mort");
                     }
                 }else{
                     nb = mort.get(0);
                     nomscore = arrayList.get(nb);
-                    nomscore.setMort(false);
+                    nomscore.setMort("no_mort");
                     nomscore = arrayList.get(nb+4);
-                    nomscore.setMort(true);
+                    nomscore.setMort("mort");
 
                 }
                 break;
@@ -237,7 +245,7 @@ public class Tarot {
         for(int i=0; i<arrayList.size(); i++) {
             nomscore = arrayList.get(i);
             int score = nomscore.getScore();
-            if(!nomscore.isMort()){
+            if(nomscore.isMort().equals("no_mort")){
                 if(a){
                 if(name.equals(nomscore.getNom())){
                     nomscore.setScore(score + point);
@@ -278,6 +286,95 @@ public class Tarot {
             NomScore ns1 = new NomScore(copyarrayList.get(i).getNom(), copyarrayList.get(i).getScore(), copyarrayList.get(i).isMort());
             arrayList.add(ns1);
             Log.i("Tarot", Integer.toString(arrayList.get(i).getScore()));
+        }
+    }
+
+    //TODO like remove nee dto change switch
+    public void setPause(String name){
+        for (int i = 0; i < arrayList.size(); i++) {
+            NomScore nomscore = arrayList.get(i);
+            if(name.equals(nomscore.getNom())) {
+                nomscore.setMort("pause");
+                if (nomscore.isMort().equals("no_mort")) {
+                    change_array();
+                }
+            }
+        }
+
+    }
+
+    public void setSupp(String name){
+        for (int i = 0; i < arrayList.size(); i++) {
+            NomScore nomscore = arrayList.get(i);
+            if (name.equals(nomscore.getNom())) {
+                arrayList.remove(i);
+                if (nomscore.isMort().equals("no_mort")) {
+                    change_array();
+                }
+            }
+        }
+    }
+
+    public void change_array(){
+        NomScore nomscore;
+        int nb;
+        ArrayList<Integer> mort = new ArrayList<Integer>();
+        switch(arrayList.size()) {
+            case 6:
+                for (int i = 0; i < arrayList.size(); i++) {
+                    nomscore = arrayList.get(i);
+                    if (nomscore.isMort().equals("mort")) {
+                        nomscore.setMort("no_mort");
+                    }
+                }
+                break;
+            case 7:
+                for (int i = 0; i < arrayList.size(); i++) {
+                    nomscore = arrayList.get(i);
+                    if (nomscore.isMort().equals("mort")) {
+                        mort.add(i);
+                    }
+                }
+                if (mort.contains(arrayList.size() - 1)) {
+                    if (mort.get(mort.size() - 2) == arrayList.size() - 2) {
+                        nomscore = arrayList.get(arrayList.size() - 2);
+                        nomscore.setMort("no_mort");
+                    } else {
+                        nomscore = arrayList.get(arrayList.size() - 1);
+                        nomscore.setMort("no_mort");
+                    }
+                } else {
+                    nb = mort.get(0);
+                    nomscore = arrayList.get(nb);
+                    nomscore.setMort("no_mort");
+                }
+                break;
+            case 8:
+                for (int i = 0; i < arrayList.size(); i++) {
+                    nomscore = arrayList.get(i);
+                    if (nomscore.isMort().equals("mort")) {
+                        mort.add(i);
+                    }
+                }
+                if (mort.contains(arrayList.size() - 1)) {
+                    if (mort.get(mort.size() - 3) == arrayList.size() - 3) {
+                        nomscore = arrayList.get(arrayList.size() - 3);
+                        nomscore.setMort("no_mort");
+                    } else if (mort.get(mort.size() - 2) == arrayList.size() - 2) {
+                        nomscore = arrayList.get(arrayList.size() - 2);
+                        nomscore.setMort("no_mort");
+                    } else {
+                        nomscore = arrayList.get(arrayList.size() - 1);
+                        nomscore.setMort("no_mort");
+                    }
+                } else {
+                    nb = mort.get(0);
+                    nomscore = arrayList.get(nb);
+                    nomscore.setMort("no_mort");
+                }
+                break;
+            default:
+                break;
         }
     }
 }

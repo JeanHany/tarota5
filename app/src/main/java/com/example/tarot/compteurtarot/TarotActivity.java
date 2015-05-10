@@ -280,6 +280,40 @@ public class TarotActivity extends Activity {
                     Log.i(TAG, "Retour");
                     displaydata(tarot);
                 break;
+            case R.id.menu_tarot_p :
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle("Avec qui ?");
+                String[] st = tarot.getjoueurs();
+                dialog.setItems( st, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Log.i(TAG, Integer.toString(i));
+                        String[] st = tarot.getjoueurs();
+                        name = st[i];
+                        Log.i(TAG, name);
+                    }
+                });
+                dialog.show();
+                tarot.setPause(name);
+                displaydata(tarot);
+                break;
+            case R.id.menu_tarot_sup :
+                AlertDialog.Builder dialog1 = new AlertDialog.Builder(this);
+                dialog1.setTitle("Avec qui ?");
+                String[] st1 = tarot.getjoueurs();
+                dialog1.setItems( st1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Log.i(TAG, Integer.toString(i));
+                        String[] st1 = tarot.getjoueurs();
+                        name = st1[i];
+                        Log.i(TAG, name);
+                    }
+                });
+                dialog1.show();
+                tarot.setSupp(name);
+                displaydata(tarot);
+                break;
             default :
                 break;
         }

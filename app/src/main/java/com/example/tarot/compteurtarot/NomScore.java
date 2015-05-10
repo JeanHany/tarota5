@@ -6,9 +6,9 @@ package com.example.tarot.compteurtarot;
 public class NomScore {
     String nom;
     int score;
-    boolean mort;
+    String mort;
 
-    public NomScore(String n, int s, boolean m){
+    public NomScore(String n, int s, String m){
         nom = n;
         score = s;
         mort = m;
@@ -30,11 +30,11 @@ public class NomScore {
         this.nom = nom;
     }
 
-    public boolean isMort() {
+    public String isMort() {
         return mort;
     }
 
-    public void setMort(boolean mort) {
+    public void setMort(String mort) {
         this.mort = mort;
     }
 }

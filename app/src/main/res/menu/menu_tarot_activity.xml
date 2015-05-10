@@ -4,9 +4,23 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".TarotActivity">
 
+
+
         <item
             android:id="@+id/menu_tarot_activity"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@android:drawable/ic_menu_edit"
             android:title="Retour"
             />
+
+    <item
+        android:id="@+id/menu_tarot_p"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Pause"
+        />
+
+    <item
+        android:id="@+id/menu_tarot_sup"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Supprimer"
+        />
 </menu>

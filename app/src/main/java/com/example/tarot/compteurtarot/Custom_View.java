@@ -52,7 +52,7 @@ public class Custom_View extends BaseAdapter{
 
         textViewn.setText(ns.getNom());
         textViews.setText(Integer.toString(ns.getScore()));
-        if(ns.isMort()){
+        if(ns.isMort().equals("mort")){
            view.setBackgroundColor(Color.RED);
         }
         return view;
